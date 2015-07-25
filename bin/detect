@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+#bind/detect <build-dir>
+
+if [ -f $1/zmq_version ]; then
+		echo "zmq-$(cat $1/zmq_version)" && exit 0
+else
+		exit 1
+fi	

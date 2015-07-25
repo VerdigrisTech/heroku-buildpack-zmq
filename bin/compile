@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+# bin/compile <build-dir> <cache-dir>
+
+set -e
+set -o pipefail
+
+BUILD_DIR=${1%/}
+CACHE_DIR=${2%/}
+ZMQ_NAME="zeromq-$(cat $BUILD_DIR/zmq_version)"
+ZMQ_SOURCE_URL="http://download.zeromq.org/$ZMQ_NAME.tar.gz"
+
+indent() {
+		sed -u 's/^/        /'
+}
+
+pecho() {
+		echo "-----> $1"
+}
+
+npecho() {
+		echo "       $1"
+}
+
+pecho "$ZMQ_NAME detected"
+
+cd $BUILD_DIR
+
+mkdir $ZMQ_NAME
+
+npecho "fetching source from $ZMQ_SOURCE_URL"
+curl -s $ZMQ_SOURCE_URL | tar zxf -
+
+npecho "zeromq  unpacked in $BUILD_DIR/$ZMQ_NAME"
+
+npecho "setting zeromq compile flags"
+
+export LDFLAGS=-L$BUILD_DIR/$ZMQ_NAME/$ZMQ_NAME/lib
+export CPPFLAGS=-I$BUILD_DIR/$ZMQ_NAME/$ZMQ_NAME/include
