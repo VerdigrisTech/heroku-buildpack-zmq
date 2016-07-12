@@ -31,7 +31,7 @@ cd $BUILD_DIR
 mkdir $ZMQ_NAME
 
 npecho "fetching source from $ZMQ_SOURCE_URL"
-curl -s $ZMQ_SOURCE_URL | tar zxf -
+curl -sL $ZMQ_SOURCE_URL | tar zxf -
 
 npecho "zeromq  unpacked in $BUILD_DIR/$ZMQ_NAME"
 
