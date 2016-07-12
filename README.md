@@ -6,6 +6,6 @@ when deployed on heroku.
 
 # Usage
 
-The buildpack detects zeromq by the presence of `zmq_version`
+The buildpack detects zeromq by the presence of a file named `zmq_version`
 in the root directory. The file contains the desired version
 of zeromq, such as `4.1.2`.
